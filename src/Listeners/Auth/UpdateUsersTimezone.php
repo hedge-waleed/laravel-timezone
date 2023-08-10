@@ -49,7 +49,7 @@ class UpdateUsersTimezone
         $ip = $this->getFromLookup();
         $geoip_info = geoip()->getLocation($ip);
 
-        if ($user->timezone != $geoip_info['timezone']) {
+        if ($user->timezone != $geoip_info->time_zone['name']) {
             if (config('timezone.overwrite') == true || $user->timezone == null) {
                 $user->timezone = $geoip_info['timezone'] ?? $geoip_info->time_zone['name'];
                 $user->save();
